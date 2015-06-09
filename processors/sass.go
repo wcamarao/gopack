@@ -51,18 +51,18 @@ func (sp SassProcessor) Process(filename string, bytes []byte) (string, []byte) 
 //
 // Return (stdin, stdout, stderr)
 //
-func (sp SassProcessor) getStreams(cmd exec.Cmd) (stdin io.WriteCloser, stdout io.ReadCloser, stderr io.ReadCloser) {
+func (sp SassProcessor) getStreams(cmd *exec.Cmd) (stdin io.WriteCloser, stdout, stderr io.ReadCloser) {
 	stdin, err := cmd.StdinPipe()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	stdout, err := cmd.StdoutPipe()
+	stdout, err = cmd.StdoutPipe()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	stderr, err := cmd.StderrPipe()
+	stderr, err = cmd.StderrPipe()
 	if err != nil {
 		log.Fatal(err)
 	}
